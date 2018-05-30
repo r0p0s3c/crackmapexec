@@ -2,10 +2,10 @@
 
 To display the help information:
 ```
-docker run jonasthambert/cme -h
+docker run n4n0m4c/cme -h
 ```
 
 Scan a local network:
 ```
-docker run jonasthambert/cme 192.168.1.0/24
+docker run n4n0m4c/cme 192.168.1.0/24
 ```

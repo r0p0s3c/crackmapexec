@@ -1,11 +1,10 @@
 FROM alpine:latest
-
-LABEL maintainer="jonas@thambert.com"
-
 WORKDIR "/root"
 
-RUN  apk add --no-cache python libssl1.0 libffi-dev python-dev py2-pip openssl openssl-dev make file libc-dev gcc && \
-  pip install crackmapexec && \
-  apk del --no-cache libssl1.0 libffi-dev python-dev py2-pip openssl-dev make file libc-dev gcc
-
-ENTRYPOINT ["cme"]
+RUN \
+  	apk add --no-cache --virtual .build-dependencies py-pip python-dev file build-base libffi-dev git openssl-dev && \
+	apk add --no-cache python openssl libffi py-setuptools && \
+  	pip install git+https://github.com/byt3bl33d3r/CrackMapExec.git && \
+	apk del .build-dependencies && \
+        rm -rfv /var/cache/apk/* ~/.cache/pip
+CMD ["cme"]
